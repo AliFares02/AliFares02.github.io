@@ -66,7 +66,7 @@ function addTask() {
   task.id = 'card-div'
   task.className = 'card custom-card shadow'
   task.style.outline = `4px solid ${taskPriority}`
-  task.innerHTML = `<div class="card-body" style="position: relative; min-height: 100px"><div style="overflow: auto; max-height: 110px; margin-bottom: 5px;"><p style="margin-right: 5px;">${taskDetails}</p></div><div><p>${taskDueDate ? 'Due by: ' + taskDueDate : ''}</p></div><div class="d-flex" style="position: absolute; left: 0; bottom: 0; right: 0; margin: 0; "><button type="button" id="complete_button" class="btn btn-success" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Complete</button><button type="button" id="delete_button" class="btn btn-danger" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Delete</button></div></div>`
+  task.innerHTML = `<div class="card-body" style="position: relative; min-height: 100px"><div style="overflow: auto; min-height: 110px;max-height: 110px; margin-bottom: 5px;"><p style="margin-right: 5px;">${taskDetails}</p></div><div><p id="due-date">${taskDueDate ? 'Due by: ' + taskDueDate : ''}</p></div><div class="d-flex" style="position: absolute; left: 0; bottom: 0; right: 0; margin: 0; "><button type="button" id="complete_button" class="btn btn-success" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Complete</button><button type="button" id="delete_button" class="btn btn-danger" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Delete</button></div></div>`
 
   Tasklist.push(task)
 
@@ -91,7 +91,9 @@ function addTask() {
 
 function handleComplete(task, index) {
   let complete_button = task.querySelector('#complete_button');
-
+  var dueDate = task.querySelector('#due-date');
+  var celebrationSound = new Audio('success_ding/Success ding Sound Effect (download).mp3');
+  celebrationSound.volume = .50;
   complete_button.innerHTML = complete_button.innerHTML === 'Completed' ? 'Complete' : 'Completed';
 
   if (complete_button.innerHTML === 'Completed') {
@@ -106,12 +108,19 @@ function handleComplete(task, index) {
       cardCover.style.backgroundColor = "gray";
       cardCover.style.opacity = ".75";
 
-      task.appendChild(cardCover);
-  } else {
-      var cardCover = document.getElementById('cardCover_' + index);
-      if (cardCover) {
-          cardCover.remove();
+      if (dueDate) {
+        dueDate.style.textDecoration = "line-through";
       }
+      task.appendChild(cardCover);
+      celebrationSound.play();
+  } else {
+    var cardCover = document.getElementById('cardCover_' + index);
+    if (cardCover) {
+          cardCover.remove();
+    }
+    if (dueDate) {
+      dueDate.style.textDecoration = "none";
+    }
   }
 }
 
