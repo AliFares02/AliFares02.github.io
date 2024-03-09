@@ -66,7 +66,7 @@ function addTask() {
   task.id = 'card-div'
   task.className = 'card custom-card shadow'
   task.style.outline = `4px solid ${taskPriority}`
-  task.innerHTML = `<div class="card-body" style="position: relative; min-height: 100px"><div style="overflow: auto; min-height: 110px;max-height: 110px; margin-bottom: 5px;"><p style="margin-right: 5px;">${taskDetails}</p></div><div><p id="due-date">${taskDueDate ? 'Due by: ' + taskDueDate : ''}</p></div><div class="d-flex" style="position: absolute; left: 0; bottom: 0; right: 0; margin: 0; "><button type="button" id="complete_button" class="btn btn-success" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Complete</button><button type="button" id="delete_button" class="btn btn-danger" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Delete</button></div></div>`
+  task.innerHTML = `<div class="card-body" style="position: relative; min-height: 100px"><div style="overflow: auto; min-height: 110px;max-height: 110px; margin-bottom: 5px;"><p style="margin-right: 5px;">${taskDetails}</p></div><div><p style="font-weight: 600; font-size: 14px;" id="due-date">${taskDueDate ? 'Due by: ' + taskDueDate : ''}</p></div><div class="d-flex" style="position: absolute; left: 0; bottom: 0; right: 0; margin: 0; "><button type="button" id="complete_button" class="btn btn-success" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Complete</button><button type="button" id="delete_button" class="btn btn-danger" style="width:50%; font-size: 10px; padding: 5px; margin: 5px;z-index: 6;">Delete</button></div></div>`
 
   Tasklist.push(task)
 
